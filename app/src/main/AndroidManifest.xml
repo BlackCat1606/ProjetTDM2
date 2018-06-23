@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="tech.salroid.filmy">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".FilmyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.Base"
+        android:resizeableActivity="true"
+        tools:targetApi="n">
+
+        <activity
+            android:name=".FilmyIntro"
+            android:label=" "
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="tech.salroid.com"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.MovieDetailsActivity"
+            android:label=" "
+            android:theme="@style/DetailsActivityTheme" />
+        <activity
+            android:name=".activities.CharacterDetailsActivity"
+            android:label="@string/details"
+            android:theme="@style/AppTheme.Base" />
+
+        <provider
+            android:name=".providers.FilmProvider"
+            android:authorities="tech.salroid.filmy"
+            android:exported="false"
+            android:syncable="true" />
+
+        <activity
+            android:name=".activities.FullCastActivity"
+            android:label=" "
+            android:theme="@style/AppTheme.Base" />
+        <activity
+            android:name=".activities.FullCrewActivity"
+            android:label=" "
+            android:theme="@style/AppTheme.Base" />
+        <activity
+            android:name=".activities.FullMovieActivity"
+            android:label="@string/title_activity_full_movie"
+            android:theme="@style/AppTheme.Base" />
+        <activity
+            android:name=".activities.FullScreenImage"
+            android:label=" "
+            android:theme="@style/FullScreenTheme" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".services.FilmyJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="62707285253d6b217b66e97e6e602bcab0edc463" />
+
+        <activity android:name=".activities.License" />
+        <activity android:name=".activities.AboutActivity" />
+
+        <receiver android:name=".widget.FilmyWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/filmy_widget_info" />
+        </receiver>
+
+        <activity android:name=".activities.CollectionsActivity" />
+        <activity android:name=".activities.LoginActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
+    </application>
+
+</manifest>
